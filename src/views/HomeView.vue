@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import PostsList from '@/components/PostsList.vue'
+import PostList from '@/components/PostList.vue'
 import ActivityList from '@/components/ActivityList.vue'
 </script>
 <template>
   <main>
-    <PostsList />
+    <PostList />
     <ActivityList />
   </main>
 </template>
@@ -13,5 +13,6 @@ main {
   width: clamp(600px, 60%, 900px);
   display: flex;
   justify-content: space-between;
+  padding-top: 2.5rem;
 }
 </style>

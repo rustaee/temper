@@ -16,6 +16,6 @@ import { RouterView } from 'vue-router'
   height: 100%;
   z-index: -1;
   background-color: #6356b0;
-  clip-path: polygon(0 0%, 0 40%, 100% 0);
+  clip-path: polygon(0 0%, 0 30%, 100% 0);
 }
 </style>
