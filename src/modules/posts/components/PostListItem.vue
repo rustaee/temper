@@ -9,6 +9,8 @@ const props = defineProps<{
   totalItems: number
 }>()
 
+defineEmits(['moveUp', 'moveDown'])
+
 const showUpArrow = computed(() => props.totalItems > 1 && props.listIndex != 0)
 const showDownArrow = computed(
   () => props.totalItems > 1 && props.listIndex != props.totalItems - 1
@@ -18,8 +20,18 @@ const showDownArrow = computed(
   <div class="item-wrapper">
     <div class="title">Post {{ post.id }}</div>
     <div class="arrow" :class="{ spaceBetween: showDownArrow || showUpArrow }">
-      <font-awesome-icon v-if="showUpArrow" :icon="faChevronUp" width="10" />
-      <font-awesome-icon v-if="showDownArrow" :icon="faChevronDown" width="10" />
+      <font-awesome-icon
+        v-if="showUpArrow"
+        :icon="faChevronUp"
+        width="10"
+        @click="$emit('moveUp')"
+      />
+      <font-awesome-icon
+        v-if="showDownArrow"
+        :icon="faChevronDown"
+        width="10"
+        @click="$emit('moveDown')"
+      />
     </div>
   </div>
 </template>
@@ -34,6 +46,7 @@ const showDownArrow = computed(
   display: flex;
   justify-content: space-between;
   align-items: stretch;
+  transition: all 0.3s ease-in-out;
 
   .title {
     padding: 0.5rem 0;

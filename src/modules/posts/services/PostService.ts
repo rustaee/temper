@@ -20,7 +20,27 @@ export default class PostService {
       })
   }
 
+  moveDown(index: number): void {
+    if (index < this._posts.length - 1) {
+      const post = this._posts[index]
+      this._posts[index] = this._posts[index + 1]
+      this._posts[index + 1] = post
+    }
+  }
+
+  moveUp(index: number): void {
+    if (index > 0) {
+      const post = this._posts[index]
+      this._posts[index] = this._posts[index - 1]
+      this._posts[index - 1] = post
+    }
+  }
+
   get posts(): Post[] {
     return this._posts
+  }
+
+  get loading(): boolean {
+    return this._loading
   }
 }
