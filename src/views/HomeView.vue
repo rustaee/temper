@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import PostList from '@/components/PostList.vue'
-import ActivityList from '@/components/ActivityList.vue'
+import PostList from '@/modules/posts/components/PostList.vue'
+import ActivityList from '@/modules/activities/components/ActivityList.vue'
 </script>
 <template>
   <main>
