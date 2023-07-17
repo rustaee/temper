@@ -1,0 +1,12 @@
+@import './base.css';
+
+#app {
+  margin: 0 auto;
+  font-weight: normal;
+  width: 100vw;
+  height: 100vh;
+  background-color: #6356b0;
+  clip-path: polygon(0 0%, 0 40%, 100% 0);
+  display: flex;
+  justify-content: center;
+}
