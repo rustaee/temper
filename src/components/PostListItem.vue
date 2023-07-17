@@ -24,16 +24,17 @@ import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons'
 
   .title {
     padding: 0.5rem 0;
-    color: #666;
   }
 }
 
 .arrow {
   display: flex;
   flex-direction: column;
-  //   font-size: 0.6rem;
   justify-content: space-between;
   color: #6356b0;
-  cursor: pointer;
+
+  svg {
+    cursor: pointer;
+  }
 }
 </style>

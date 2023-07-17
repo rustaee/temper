@@ -14,5 +14,6 @@ main {
   display: flex;
   justify-content: space-between;
   padding-top: 2.5rem;
+  align-items: start;
 }
 </style>
