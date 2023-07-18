@@ -27,11 +27,12 @@ export default class PostService {
   }
 
   moveDown(index: number): void {
+    //If it's not the last one
     if (index < this._posts.length - 1) {
-      //it's not the last one
+      const post = this._posts[index]
       this._swapPosts(index, index + 1)
       this._addActivity({
-        id: Date.now().toString(),
+        postId: post.id,
         from: index,
         to: index + 1,
         action: 'down',
@@ -41,11 +42,12 @@ export default class PostService {
   }
 
   moveUp(index: number): void {
+    //If it's not the first one
     if (index > 0) {
-      //it's not the first one
+      const post = this._posts[index]
       this._swapPosts(index, index - 1)
       this._addActivity({
-        id: Date.now().toString(),
+        postId: post.id,
         from: index,
         to: index - 1,
         action: 'up',

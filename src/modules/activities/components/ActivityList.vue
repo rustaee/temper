@@ -12,7 +12,7 @@ defineProps<{
     <div class="activities">
       <span v-if="!activities.length">Start by reordering the posts</span>
       <ul>
-        <li class="activity-item" v-for="activity in activities" :key="activity.id">
+        <li class="activity-item" v-for="activity in activities" :key="activity.postId">
           <ActivityListItem :activity="activity" />
         </li>
       </ul>

@@ -7,7 +7,9 @@ defineProps<{
 </script>
 <template>
   <div class="item-wrapper">
-    <div class="title">from {{ activity.from }} to {{ activity.to }}</div>
+    <div class="title">
+      Moved Post {{ activity.postId }} from {{ activity.from }} to {{ activity.to }}
+    </div>
     <div class="action">
       <button>Time travel</button>
     </div>
@@ -21,7 +23,7 @@ defineProps<{
   border-bottom: 1px solid #eaeaea;
   font-size: 0.8rem;
   height: 50px;
-  animation: test 0.5s ease;
+  animation: strech 0.5s ease;
   overflow: hidden;
   padding: 0 0.7rem;
 }
@@ -36,7 +38,7 @@ button {
   font-weight: 600;
 }
 
-@keyframes test {
+@keyframes strech {
   0% {
     height: 0;
   }
