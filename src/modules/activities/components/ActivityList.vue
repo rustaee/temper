@@ -1,13 +1,19 @@
 <script setup lang="ts">
+import { Activity } from '../types/activity.interface'
 import ActivityListItem from './ActivityListItem.vue'
+
+defineProps<{
+  activities: Activity[]
+}>()
 </script>
 <template>
   <div class="activity-wrapper">
     <h2>List of actions commited</h2>
     <div class="activities">
+      <span v-if="!activities.length">Start by reordering the posts</span>
       <ul>
-        <li class="activity-item" v-for="i in 2" :key="i">
-          <ActivityListItem />
+        <li class="activity-item" v-for="activity in activities" :key="activity.id">
+          <ActivityListItem :activity="activity" />
         </li>
       </ul>
     </div>
@@ -32,6 +38,13 @@ h2 {
   width: 100%;
   padding: 1rem;
   background-color: #f5f5f5;
+  text-align: center;
+
+  span {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #6356b0;
+  }
 }
 
 ul {

@@ -1,7 +1,13 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { Activity } from '../types/activity.interface'
+
+defineProps<{
+  activity: Activity
+}>()
+</script>
 <template>
   <div class="item-wrapper">
-    <div class="title">action title</div>
+    <div class="title">from {{ activity.from }} to {{ activity.to }}</div>
     <div class="action">
       <button>Time travel</button>
     </div>
@@ -9,12 +15,15 @@
 </template>
 <style lang="scss" scoped>
 .item-wrapper {
-  padding: 0.7rem;
   display: flex;
   justify-content: space-between;
-  align-items: stretch;
+  align-items: center;
   border-bottom: 1px solid #eaeaea;
   font-size: 0.8rem;
+  height: 50px;
+  animation: test 0.5s ease;
+  overflow: hidden;
+  padding: 0 0.7rem;
 }
 
 button {
@@ -25,5 +34,14 @@ button {
   border-radius: 5px;
   font-size: 0.7rem;
   font-weight: 600;
+}
+
+@keyframes test {
+  0% {
+    height: 0;
+  }
+  100% {
+    height: 50px;
+  }
 }
 </style>

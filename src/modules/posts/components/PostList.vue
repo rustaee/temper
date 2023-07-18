@@ -1,18 +1,16 @@
 <script setup lang="ts">
-import { computed, onMounted, onUpdated, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import PostListItem from './PostListItem.vue'
 import PostService from '../services/PostService'
 
-const postService = ref(new PostService())
+const props = defineProps<{
+  postService: PostService
+}>()
 
-const posts = computed(() => postService.value.posts.slice(0, 5))
+const posts = computed(() => props.postService.posts.slice(0, 5))
 
 onMounted(() => {
-  postService.value.getAllPosts()
-})
-
-onUpdated(() => {
-  console.log('updated')
+  props.postService.getAllPosts()
 })
 </script>
 <template>

@@ -46,7 +46,6 @@ const showDownArrow = computed(
   display: flex;
   justify-content: space-between;
   align-items: stretch;
-  transition: all 0.3s ease-in-out;
 
   .title {
     padding: 0.5rem 0;

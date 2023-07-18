@@ -1,10 +1,16 @@
 import type { Post } from '../types/post.interface'
 import axios from 'axios'
+import type { Activity } from '@/modules/activities/types/activity.interface'
 
 export default class PostService {
   private _posts: Post[] = []
   private _loading = false
-  constructor() {}
+
+  private _addActivity: (activity: Activity) => void
+  constructor(addActivity: (activity: Activity) => void) {
+    this._addActivity = addActivity
+  }
+
   async getAllPosts(): Promise<void> {
     this._loading = true
     axios
@@ -22,18 +28,36 @@ export default class PostService {
 
   moveDown(index: number): void {
     if (index < this._posts.length - 1) {
-      const post = this._posts[index]
-      this._posts[index] = this._posts[index + 1]
-      this._posts[index + 1] = post
+      //it's not the last one
+      this._swapPosts(index, index + 1)
+      this._addActivity({
+        id: Date.now().toString(),
+        from: index,
+        to: index + 1,
+        action: 'down',
+        state: this._posts.map((post) => post.id)
+      })
     }
   }
 
   moveUp(index: number): void {
     if (index > 0) {
-      const post = this._posts[index]
-      this._posts[index] = this._posts[index - 1]
-      this._posts[index - 1] = post
+      //it's not the first one
+      this._swapPosts(index, index - 1)
+      this._addActivity({
+        id: Date.now().toString(),
+        from: index,
+        to: index - 1,
+        action: 'up',
+        state: this._posts.map((post) => post.id)
+      })
     }
+  }
+
+  private _swapPosts(index1: number, index2: number): void {
+    const post = this._posts[index1]
+    this._posts[index1] = this._posts[index2]
+    this._posts[index2] = post
   }
 
   get posts(): Post[] {
