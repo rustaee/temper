@@ -23,7 +23,7 @@ const timeTravel = async (activity: Activity) => {
   <div class="activity-wrapper">
     <h2>
       <span>List of actions commited</span>
-      <div class="revert">
+      <div class="revert" v-if="activities.length">
         <font-awesome-icon :icon="faRotate" @click="$emit('revert')" />
         <span class="tooltiptext">Revert all the actions</span>
       </div>
@@ -104,8 +104,6 @@ ul {
   border-radius: 6px;
   padding: 5px 0;
   font-size: 0.7rem;
-
-  /* Position the tooltip */
   position: absolute;
   z-index: 1;
 }
