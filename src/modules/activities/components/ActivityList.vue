@@ -1,12 +1,15 @@
 <script setup lang="ts">
 import { Activity } from '../types/activity.interface'
 import ActivityListItem from './ActivityListItem.vue'
+import { faRotate } from '@fortawesome/free-solid-svg-icons'
 
 const props = defineProps<{
   activities: Activity[]
   removeActivitiesToIndex: (activity: Activity) => void
   postService: PostService
 }>()
+
+defineEmits(['revert'])
 
 const timeTravel = async (activity: Activity) => {
   await props.postService.timeTravel({
@@ -18,7 +21,14 @@ const timeTravel = async (activity: Activity) => {
 </script>
 <template>
   <div class="activity-wrapper">
-    <h2>List of actions commited</h2>
+    <h2>
+      <span>List of actions commited</span>
+      <div class="revert">
+        <font-awesome-icon :icon="faRotate" @click="$emit('revert')" />
+        <span class="tooltiptext">Revert all the actions</span>
+      </div>
+    </h2>
+
     <div class="activities">
       <span v-if="!activities.length">Start by reordering the posts</span>
       <ul>
@@ -42,10 +52,21 @@ const timeTravel = async (activity: Activity) => {
 }
 
 h2 {
-  font-size: 1.1rem;
-  margin-bottom: 1rem;
-  font-weight: 600;
   margin: 1rem;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+
+  * {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+  }
+
+  svg {
+    cursor: pointer;
+  }
 }
 
 .activities {
@@ -67,5 +88,29 @@ ul {
   border-radius: 0.2rem;
   border: 1px solid #eaeaea;
   box-shadow: 0 0.2rem 0.7rem rgba(0, 0, 0, 0.1);
+}
+
+.revert {
+  position: relative;
+  height: 20px;
+}
+
+.revert .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  font-size: 0.7rem;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+}
+
+.revert:hover .tooltiptext {
+  visibility: visible;
 }
 </style>

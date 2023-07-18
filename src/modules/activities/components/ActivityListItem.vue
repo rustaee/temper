@@ -13,8 +13,7 @@ defineEmits<{
 <template>
   <div class="item-wrapper">
     <div class="title">
-      Moved Post {{ activity.postId }} from {{ activity.from }} to {{ activity.to }}
-      {{ activity.state.slice(0, 5) }}
+      Moved Post {{ activity.postId }} from index {{ activity.from }} to index {{ activity.to }}
     </div>
     <div class="action">
       <button v-if="!isLastAction" @click="$emit('timeTravel')">Time travel</button>

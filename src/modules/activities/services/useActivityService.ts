@@ -25,12 +25,18 @@ export default function useActivityService() {
     saveActivities()
   }
 
+  const deleteAllActivities = () => {
+    activities.value = []
+    saveActivities()
+  }
+
   loadActivities()
 
   return {
     activities,
     loadActivities,
     addActivity,
-    removeActivitiesToIndex
+    removeActivitiesToIndex,
+    deleteAllActivities
   }
 }
