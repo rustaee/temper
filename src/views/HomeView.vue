@@ -15,7 +15,7 @@ onMounted(() => {
 <template>
   <main>
     <PostList :post-service="postService" :addActivity="addActivity" />
-    <ActivityList :activities="activities" />
+    <ActivityList :activities="activities" :post-service="postService" />
   </main>
 </template>
 <style lang="scss" scoped>

@@ -4,6 +4,7 @@ import ActivityListItem from './ActivityListItem.vue'
 
 defineProps<{
   activities: Activity[]
+  postService: PostService
 }>()
 </script>
 <template>
@@ -13,7 +14,12 @@ defineProps<{
       <span v-if="!activities.length">Start by reordering the posts</span>
       <ul>
         <li class="activity-item" v-for="activity in activities" :key="activity.postId">
-          <ActivityListItem :activity="activity" />
+          <ActivityListItem
+            :activity="activity"
+            @timeTravel="
+              postService.timeTravel({ allActivities: activities, destinationActivity: activity })
+            "
+          />
         </li>
       </ul>
     </div>

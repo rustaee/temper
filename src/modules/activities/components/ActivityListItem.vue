@@ -4,14 +4,19 @@ import { Activity } from '../types/activity.interface'
 defineProps<{
   activity: Activity
 }>()
+
+defineEmits<{
+  timeTravel: () => void
+}>()
 </script>
 <template>
   <div class="item-wrapper">
     <div class="title">
       Moved Post {{ activity.postId }} from {{ activity.from }} to {{ activity.to }}
+      <!-- {{ activity.state.slice(0, 5) }} -->
     </div>
     <div class="action">
-      <button>Time travel</button>
+      <button @click="$emit('timeTravel')">Time travel</button>
     </div>
   </div>
 </template>
@@ -36,6 +41,15 @@ button {
   border-radius: 5px;
   font-size: 0.7rem;
   font-weight: 600;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #26fb8d;
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
 }
 
 @keyframes strech {

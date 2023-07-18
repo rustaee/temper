@@ -32,6 +32,7 @@ export default class PostService {
       const post = this._posts[index]
       this._swapPosts(index, index + 1)
       this._addActivity({
+        id: Date.now().toString(),
         postId: post.id,
         from: index,
         to: index + 1,
@@ -47,6 +48,7 @@ export default class PostService {
       const post = this._posts[index]
       this._swapPosts(index, index - 1)
       this._addActivity({
+        id: Date.now().toString(),
         postId: post.id,
         from: index,
         to: index - 1,
@@ -60,6 +62,36 @@ export default class PostService {
     const post = this._posts[index1]
     this._posts[index1] = this._posts[index2]
     this._posts[index2] = post
+  }
+
+  async timeTravel({
+    allActivities,
+    destinationActivity
+  }: {
+    allActivities: Activity[]
+    destinationActivity: Activity
+  }): Promise<void> {
+    // this._posts = destinationActivity.state.map((id) => this._posts.find((post) => post.id === id)!)
+    //The above  approach is to show only the destination state
+
+    /*
+    The following approach is to show all the states from the beginning to the destination so feels more
+    we want 50ms delay between each state. since setTimeout is async we need to use await. otherwise all the states will be shown at once after 50ms
+    */
+    const destinationIndex = allActivities.findIndex(
+      (activity) => activity.id === destinationActivity.id
+    )
+
+    for (let i = 0; i <= destinationIndex; i++) {
+      const activity = allActivities[i]
+      await new Promise<void>((resolve) => {
+        setTimeout(() => {
+          this._posts = activity.state.map((id) => this._posts.find((post) => post.id === id)!)
+
+          resolve()
+        }, 50)
+      })
+    }
   }
 
   get posts(): Post[] {
