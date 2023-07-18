@@ -3,6 +3,7 @@ import { Activity } from '../types/activity.interface'
 
 defineProps<{
   activity: Activity
+  isLastAction: boolean
 }>()
 
 defineEmits<{
@@ -13,10 +14,10 @@ defineEmits<{
   <div class="item-wrapper">
     <div class="title">
       Moved Post {{ activity.postId }} from {{ activity.from }} to {{ activity.to }}
-      <!-- {{ activity.state.slice(0, 5) }} -->
+      {{ activity.state.slice(0, 5) }}
     </div>
     <div class="action">
-      <button @click="$emit('timeTravel')">Time travel</button>
+      <button v-if="!isLastAction" @click="$emit('timeTravel')">Time travel</button>
     </div>
   </div>
 </template>

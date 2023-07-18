@@ -5,7 +5,7 @@ import useActivityService from '@/modules/activities/services/useActivityService
 import PostService from '@/modules/posts/services/PostService'
 import { onMounted, ref } from 'vue'
 
-const { activities, addActivity } = useActivityService()
+const { activities, addActivity, removeActivitiesToIndex } = useActivityService()
 const postService = ref(new PostService(addActivity))
 
 onMounted(() => {
@@ -15,7 +15,11 @@ onMounted(() => {
 <template>
   <main>
     <PostList :post-service="postService" :addActivity="addActivity" />
-    <ActivityList :activities="activities" :post-service="postService" />
+    <ActivityList
+      :activities="activities"
+      :remove-activities-to-index="removeActivitiesToIndex"
+      :post-service="postService"
+    />
   </main>
 </template>
 <style lang="scss" scoped>

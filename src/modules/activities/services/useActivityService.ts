@@ -18,11 +18,19 @@ export default function useActivityService() {
     saveActivities()
   }
 
+  const removeActivitiesToIndex = (activity: Activity) => {
+    console.log(activities.value)
+    const index = activities.value.findIndex((a) => a.id === activity.id)
+    activities.value.splice(0, index)
+    saveActivities()
+  }
+
   loadActivities()
 
   return {
     activities,
     loadActivities,
-    addActivity
+    addActivity,
+    removeActivitiesToIndex
   }
 }

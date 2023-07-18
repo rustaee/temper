@@ -2,10 +2,19 @@
 import { Activity } from '../types/activity.interface'
 import ActivityListItem from './ActivityListItem.vue'
 
-defineProps<{
+const props = defineProps<{
   activities: Activity[]
+  removeActivitiesToIndex: (activity: Activity) => void
   postService: PostService
 }>()
+
+const timeTravel = async (activity: Activity) => {
+  await props.postService.timeTravel({
+    allActivities: props.activities,
+    destinationActivity: activity
+  })
+  props.removeActivitiesToIndex(activity)
+}
 </script>
 <template>
   <div class="activity-wrapper">
@@ -13,12 +22,11 @@ defineProps<{
     <div class="activities">
       <span v-if="!activities.length">Start by reordering the posts</span>
       <ul>
-        <li class="activity-item" v-for="activity in activities" :key="activity.postId">
+        <li class="activity-item" v-for="(activity, index) in activities" :key="activity.postId">
           <ActivityListItem
             :activity="activity"
-            @timeTravel="
-              postService.timeTravel({ allActivities: activities, destinationActivity: activity })
-            "
+            @timeTravel="() => timeTravel(activity)"
+            :is-last-action="index === 0"
           />
         </li>
       </ul>
